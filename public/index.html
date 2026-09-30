@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#101923">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Mạch Giới Online — Vết Nứt Mạch Giới</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main id="app">
+    <canvas id="world" aria-label="Thế giới Mạch Giới"></canvas>
+    <div class="vignette"></div>
+
+    <header class="hud-top">
+      <section class="player-card glass">
+        <div class="avatar" id="avatar">✦</div>
+        <div class="player-data">
+          <div class="name-line"><strong id="player-name">Lữ khách</strong><span id="player-level">Lv. 1</span></div>
+          <div class="bar hp"><div id="hp-fill"></div><span id="hp-text">120 / 120</span></div>
+          <div class="bar ki"><div id="ki-fill"></div><span id="ki-text">100 / 100</span></div>
+        </div>
+      </section>
+      <div class="world-title glass"><small>MẠCH GIỚI</small><strong id="map-name">Giao Hội</strong></div>
+      <nav class="top-actions" aria-label="Menu game">
+        <button data-panel="story" title="Cốt truyện"><span>✧</span> Truyện</button>
+        <button data-panel="inventory" title="Túi đồ"><span>▣</span> Túi đồ</button>
+        <button data-panel="forge" title="Lò rèn"><span>⚒</span> Lò rèn</button>
+        <button data-panel="shop" title="Cửa hàng"><span>◇</span> Cửa hàng</button>
+        <button data-panel="settings" title="Đồ họa"><span>⚙</span> Đồ họa</button>
+        <button data-panel="help" title="Hướng dẫn"><span>?</span></button>
+      </nav>
+    </header>
+
+    <aside class="quest-card glass">
+      <div class="eyebrow">HÀNH TRÌNH</div>
+      <h2 id="quest-title">Dấu ấn khởi hành</h2>
+      <p id="quest-description">Chọn một tộc để bắt đầu.</p>
+      <div class="quest-progress"><div id="quest-progress-fill"></div></div>
+      <div class="quest-bottom"><span id="quest-count">0 / 1</span><button id="claim-quest" class="small-primary" hidden>Nhận thưởng</button></div>
+    </aside>
+
+    <aside class="minimap glass"><div class="compass">BẮC</div><canvas id="mini" width="170" height="170"></canvas><div id="mini-map-label">Giao Hội</div></aside>
+    <div id="interact-hint" class="interact-hint glass" hidden>Nhấn <kbd>F</kbd> để tương tác</div>
+    <div id="toast-stack" aria-live="polite"></div>
+
+    <div class="bottom-ui">
+      <section class="chat glass"><div id="chat-log"><p><b>Hệ thống</b> Chào mừng đến Mạch Giới.</p></div><form id="chat-form"><input id="chat-input" maxlength="160" placeholder="Nhập để trò chuyện..."><button title="Gửi tin">➤</button></form></section>
+      <div class="action-row">
+        <div class="resource-pills glass"><span title="Đồng Linh">◉ <b id="gold">0</b></span><span title="Gỗ">🪵 <b id="wood">0</b></span><span title="Quặng">🪨 <b id="ore">0</b></span></div>
+        <div class="hotbar glass">
+          <button id="action-attack" title="Đánh thường (J)"><span>⚔</span><small>J</small></button>
+          <button id="action-skill" class="skill" title="Kỹ năng (K)"><span>✦</span><small>K</small></button>
+          <button id="action-interact" title="Tương tác (F)"><span>✋</span><small>F</small></button>
+          <button id="action-potion" title="Bình hồi phục (H)"><span>🧪</span><small>H</small></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-controls" aria-label="Điều khiển cảm ứng">
+      <div id="joystick" class="joystick"><div id="stick"></div></div>
+      <div class="touch-actions"><button data-action="interact">✋</button><button data-action="potion">🧪</button><button data-action="skill" class="touch-skill">✦</button><button data-action="attack" class="touch-attack">⚔</button></div>
+    </div>
+
+    <div id="auth-screen" class="full-screen">
+      <div class="auth-backdrop"><div class="auth-orb orb-a"></div><div class="auth-orb orb-b"></div><div class="auth-orb orb-c"></div></div>
+      <div class="auth-card glass">
+        <div class="brand-mark">✦</div><div class="eyebrow">PHIÊU LƯU TRỰC TUYẾN</div><h1>MẠCH GIỚI <em>ONLINE</em></h1>
+        <p>Ba mạch năng lượng đã vỡ. Một thế giới đang chờ người hàn gắn.</p>
+        <form id="auth-form">
+          <label>Tài khoản<input id="username" autocomplete="username" required minlength="3" maxlength="18" placeholder="Tên lữ khách"></label>
+          <label>Mật khẩu<input id="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Tối thiểu 8 ký tự"></label>
+          <button type="submit" id="auth-submit" class="primary">Vào thế giới</button>
+          <div id="auth-error" role="alert"></div>
+        </form>
+        <button id="auth-toggle" class="text-button">Chưa có tài khoản? Tạo mới</button>
+        <small>Bản chơi thử lưu tiến độ trên máy chủ tại máy của bạn.</small>
+      </div>
+    </div>
+
+    <div id="modal" class="modal-layer" hidden><div class="modal-scrim" data-close="true"></div><section class="modal-card glass"><button id="modal-close" class="close" aria-label="Đóng">×</button><div id="modal-content"></div></section></div>
+  </main>
+  <script type="module" src="/game.js"></script>
+</body>
+</html>

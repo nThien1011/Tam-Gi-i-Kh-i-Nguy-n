@@ -1,0 +1,185 @@
+{
+  "schema_version": "demo-1.0.0",
+  "status": "DESIGN_PROPOSED",
+  "world": "rpg_demo",
+  "ground_y": 64,
+  "coordinate_status": "blockout đề xuất; builder đo và cập nhật trước M3-01",
+  "maps": [
+    {
+      "id": "MAP_HUB",
+      "display_name": "Quảng Trường Giao Hội",
+      "bounds_xz": [-50, -50, 50, 50],
+      "spawn_xyz": [0, 65, 0],
+      "safe": true,
+      "exits": ["MAP_THIEN_PHONG", "MAP_AM_MOC", "MAP_HOA_HAC", "MAP_BOSS_GATE"],
+      "npcs": ["NPC_GUIDE", "NPC_SMITH"],
+      "mob_spawns": []
+    },
+    {
+      "id": "MAP_THIEN_PHONG",
+      "display_name": "Đồi Lôi Phong",
+      "bounds_xz": [-205, -50, -85, 50],
+      "spawn_xyz": [-95, 65, 0],
+      "safe": false,
+      "exits": ["MAP_HUB"],
+      "npcs": ["NPC_MENTOR_THUNDER"],
+      "mob_spawns": [
+        {"id": "TF_01", "mob_id": "MOB_SPARK_RAT", "xyz": [-125, 65, -24], "capacity": 2},
+        {"id": "TF_02", "mob_id": "MOB_SPARK_RAT", "xyz": [-160, 65, 0], "capacity": 2},
+        {"id": "TF_03", "mob_id": "MOB_SPARK_RAT", "xyz": [-190, 65, 24], "capacity": 2}
+      ]
+    },
+    {
+      "id": "MAP_AM_MOC",
+      "display_name": "Rừng Âm Mộc",
+      "bounds_xz": [85, -50, 205, 50],
+      "spawn_xyz": [95, 65, 0],
+      "safe": false,
+      "exits": ["MAP_HUB"],
+      "npcs": ["NPC_MENTOR_ROOT"],
+      "mob_spawns": [
+        {"id": "AM_01", "mob_id": "MOB_ROOTLING", "xyz": [125, 65, -24], "capacity": 2},
+        {"id": "AM_02", "mob_id": "MOB_ROOTLING", "xyz": [160, 65, 0], "capacity": 2},
+        {"id": "AM_03", "mob_id": "MOB_ROOTLING", "xyz": [190, 65, 24], "capacity": 2}
+      ]
+    },
+    {
+      "id": "MAP_HOA_HAC",
+      "display_name": "Khe Hỏa Hắc",
+      "bounds_xz": [-60, -205, 60, -85],
+      "spawn_xyz": [0, 65, -95],
+      "safe": false,
+      "exits": ["MAP_HUB"],
+      "npcs": ["NPC_MENTOR_EMBER"],
+      "mob_spawns": [
+        {"id": "HH_01", "mob_id": "MOB_CINDER_HOUND", "xyz": [-25, 65, -125], "capacity": 2},
+        {"id": "HH_02", "mob_id": "MOB_CINDER_HOUND", "xyz": [0, 65, -160], "capacity": 2},
+        {"id": "HH_03", "mob_id": "MOB_CINDER_HOUND", "xyz": [25, 65, -190], "capacity": 2}
+      ]
+    },
+    {
+      "id": "MAP_BOSS_GATE",
+      "display_name": "Lối Vào Thạch Môn",
+      "bounds_xz": [-12, 55, 12, 125],
+      "spawn_xyz": [0, 65, 58],
+      "safe": false,
+      "exits": ["MAP_HUB", "MAP_ARENA"],
+      "npcs": ["NPC_WARDEN"],
+      "mob_spawns": [
+        {"id": "BG_01", "mob_id": "MOB_ANCIENT_WISP", "xyz": [-5, 65, 82], "capacity": 1},
+        {"id": "BG_02", "mob_id": "MOB_RUIN_GUARD", "xyz": [0, 65, 105], "capacity": 1}
+      ]
+    },
+    {
+      "id": "MAP_ARENA",
+      "display_name": "Vòng Đá Tam Giới",
+      "bounds_xz": [-32, 135, 32, 199],
+      "spawn_xyz": [0, 65, 143],
+      "safe": false,
+      "exits": ["MAP_HUB"],
+      "npcs": [],
+      "mob_spawns": []
+    }
+  ],
+  "portals": [
+    {"id": "PORTAL_HUB_TF", "from": "MAP_HUB", "to": "MAP_THIEN_PHONG", "xyz": [-45, 65, 0], "destination_xyz": [-95, 65, 0], "requires_quest": "Q_INTRO_01"},
+    {"id": "PORTAL_TF_HUB", "from": "MAP_THIEN_PHONG", "to": "MAP_HUB", "xyz": [-92, 65, 0], "destination_xyz": [-38, 65, 0]},
+    {"id": "PORTAL_HUB_AM", "from": "MAP_HUB", "to": "MAP_AM_MOC", "xyz": [45, 65, 0], "destination_xyz": [95, 65, 0], "requires_quest": "Q_INTRO_01"},
+    {"id": "PORTAL_AM_HUB", "from": "MAP_AM_MOC", "to": "MAP_HUB", "xyz": [92, 65, 0], "destination_xyz": [38, 65, 0]},
+    {"id": "PORTAL_HUB_HH", "from": "MAP_HUB", "to": "MAP_HOA_HAC", "xyz": [0, 65, -45], "destination_xyz": [0, 65, -95], "requires_quest": "Q_INTRO_01"},
+    {"id": "PORTAL_HH_HUB", "from": "MAP_HOA_HAC", "to": "MAP_HUB", "xyz": [0, 65, -92], "destination_xyz": [0, 65, -38]},
+    {"id": "PORTAL_HUB_GATE", "from": "MAP_HUB", "to": "MAP_BOSS_GATE", "xyz": [0, 65, 45], "destination_xyz": [0, 65, 58], "requires_quest": "Q_INTRO_04"},
+    {"id": "PORTAL_GATE_HUB", "from": "MAP_BOSS_GATE", "to": "MAP_HUB", "xyz": [0, 65, 60], "destination_xyz": [0, 65, 38]},
+    {"id": "PORTAL_GATE_ARENA", "from": "MAP_BOSS_GATE", "to": "MAP_ARENA", "xyz": [0, 65, 123], "destination_xyz": [0, 65, 143], "requires_quest": "Q_INTRO_04", "requires_party": true},
+    {"id": "PORTAL_ARENA_HUB", "from": "MAP_ARENA", "to": "MAP_HUB", "xyz": [0, 65, 138], "destination_xyz": [0, 65, 0]}
+  ],
+  "npcs": [
+    {"id": "NPC_GUIDE", "map_id": "MAP_HUB", "xyz": [0, 65, 8]},
+    {"id": "NPC_SMITH", "map_id": "MAP_HUB", "xyz": [12, 65, 8]},
+    {"id": "NPC_MENTOR_THUNDER", "map_id": "MAP_THIEN_PHONG", "xyz": [-100, 65, 8]},
+    {"id": "NPC_MENTOR_ROOT", "map_id": "MAP_AM_MOC", "xyz": [100, 65, 8]},
+    {"id": "NPC_MENTOR_EMBER", "map_id": "MAP_HOA_HAC", "xyz": [8, 65, -100]},
+    {"id": "NPC_WARDEN", "map_id": "MAP_BOSS_GATE", "xyz": [0, 65, 117]}
+  ],
+  "items": [
+    {"id": "ITEM_TF_WEAPON", "name": "Lôi Nhận Sơ Khai", "kind": "EQUIPMENT", "slot": "WEAPON", "race": "THIEN_PHONG", "rarity": "COMMON", "stats": {"attack": 3}, "binding": "SOULBOUND"},
+    {"id": "ITEM_AM_WEAPON", "name": "Mộc Trượng Sơ Khai", "kind": "EQUIPMENT", "slot": "WEAPON", "race": "AM_MOC", "rarity": "COMMON", "stats": {"attack": 3}, "binding": "SOULBOUND"},
+    {"id": "ITEM_HH_WEAPON", "name": "Hỏa Quyền Sơ Khai", "kind": "EQUIPMENT", "slot": "WEAPON", "race": "HOA_HAC", "rarity": "COMMON", "stats": {"attack": 3}, "binding": "SOULBOUND"},
+    {"id": "ITEM_TF_ARMOR", "name": "Giáp Phong Sơ Khai", "kind": "EQUIPMENT", "slot": "ARMOR", "race": "THIEN_PHONG", "rarity": "COMMON", "stats": {"max_hp": 12}, "binding": "SOULBOUND"},
+    {"id": "ITEM_AM_ARMOR", "name": "Giáp Mộc Sơ Khai", "kind": "EQUIPMENT", "slot": "ARMOR", "race": "AM_MOC", "rarity": "COMMON", "stats": {"max_hp": 12}, "binding": "SOULBOUND"},
+    {"id": "ITEM_HH_ARMOR", "name": "Giáp Hỏa Sơ Khai", "kind": "EQUIPMENT", "slot": "ARMOR", "race": "HOA_HAC", "rarity": "COMMON", "stats": {"max_hp": 12}, "binding": "SOULBOUND"},
+    {"id": "ITEM_TF_CHARM", "name": "Ấn Phong Sơ Khai", "kind": "EQUIPMENT", "slot": "ACCESSORY", "race": "THIEN_PHONG", "rarity": "COMMON", "stats": {"max_ki": 10}, "binding": "SOULBOUND"},
+    {"id": "ITEM_AM_CHARM", "name": "Ấn Mộc Sơ Khai", "kind": "EQUIPMENT", "slot": "ACCESSORY", "race": "AM_MOC", "rarity": "COMMON", "stats": {"max_ki": 10}, "binding": "SOULBOUND"},
+    {"id": "ITEM_HH_CHARM", "name": "Ấn Hỏa Sơ Khai", "kind": "EQUIPMENT", "slot": "ACCESSORY", "race": "HOA_HAC", "rarity": "COMMON", "stats": {"max_ki": 10}, "binding": "SOULBOUND"},
+    {"id": "ITEM_WARDEN_CHARM", "name": "Ấn Vòng Đá", "kind": "EQUIPMENT", "slot": "ACCESSORY", "race": "ANY", "rarity": "COMMON", "stats": {"max_hp": 8, "max_ki": 6}, "binding": "SOULBOUND"},
+    {"id": "MATERIAL_INITIATE", "name": "Mảnh Khởi Hành", "kind": "MATERIAL", "stack_max": 64, "binding": "SOULBOUND"},
+    {"id": "MATERIAL_ELITE_CORE", "name": "Lõi Thạch Vệ", "kind": "MATERIAL", "stack_max": 64, "binding": "SOULBOUND"},
+    {"id": "MATERIAL_RITUAL", "name": "Dấu Ấn Nghi Thức", "kind": "MATERIAL", "stack_max": 64, "binding": "SOULBOUND"}
+  ],
+  "race_starter_items": {
+    "THIEN_PHONG": ["ITEM_TF_WEAPON", "ITEM_TF_ARMOR", "ITEM_TF_CHARM"],
+    "AM_MOC": ["ITEM_AM_WEAPON", "ITEM_AM_ARMOR", "ITEM_AM_CHARM"],
+    "HOA_HAC": ["ITEM_HH_WEAPON", "ITEM_HH_ARMOR", "ITEM_HH_CHARM"]
+  },
+  "race_zone_mob": {
+    "THIEN_PHONG": "MOB_SPARK_RAT",
+    "AM_MOC": "MOB_ROOTLING",
+    "HOA_HAC": "MOB_CINDER_HOUND"
+  },
+  "mobs": [
+    {"id": "MOB_SPARK_RAT", "map_id": "MAP_THIEN_PHONG", "hp": 90, "attack": 8, "attack_interval_ms": 1600, "xp": 12, "loot_table": "LOOT_SPARK_RAT", "respawn_seconds": [15, 25]},
+    {"id": "MOB_ROOTLING", "map_id": "MAP_AM_MOC", "hp": 110, "attack": 7, "attack_interval_ms": 1600, "xp": 12, "loot_table": "LOOT_ROOTLING", "respawn_seconds": [15, 25]},
+    {"id": "MOB_CINDER_HOUND", "map_id": "MAP_HOA_HAC", "hp": 100, "attack": 9, "attack_interval_ms": 1600, "xp": 12, "loot_table": "LOOT_CINDER_HOUND", "respawn_seconds": [15, 25]},
+    {"id": "MOB_RUIN_GUARD", "map_id": "MAP_BOSS_GATE", "hp": 220, "attack": 14, "attack_interval_ms": 1800, "xp": 30, "loot_table": "LOOT_RUIN_GUARD", "respawn_seconds": [25, 25]},
+    {"id": "MOB_ANCIENT_WISP", "map_id": "MAP_BOSS_GATE", "hp": 70, "attack": 6, "attack_interval_ms": 1800, "xp": 10, "loot_table": "LOOT_ANCIENT_WISP", "respawn_seconds": [25, 25]}
+  ],
+  "loot_tables": [
+    {"id": "LOOT_SPARK_RAT", "currency": [4, 6], "rolls": [{"item_id": "MATERIAL_INITIATE", "chance": 0.25, "amount": 1}]},
+    {"id": "LOOT_ROOTLING", "currency": [4, 6], "rolls": [{"item_id": "MATERIAL_INITIATE", "chance": 0.25, "amount": 1}]},
+    {"id": "LOOT_CINDER_HOUND", "currency": [4, 6], "rolls": [{"item_id": "MATERIAL_INITIATE", "chance": 0.25, "amount": 1}]},
+    {"id": "LOOT_RUIN_GUARD", "currency": [12, 16], "rolls": [{"item_id": "MATERIAL_INITIATE", "chance": 0.40, "amount": 1}, {"item_id": "MATERIAL_ELITE_CORE", "chance": 0.30, "amount": 1}]},
+    {"id": "LOOT_ANCIENT_WISP", "currency": [3, 5], "rolls": [{"item_id": "MATERIAL_INITIATE", "chance": 0.15, "amount": 1}]},
+    {"id": "LOOT_TRINITY_WARDEN", "currency": [20, 20], "guaranteed": [{"item_id": "MATERIAL_RITUAL", "amount": 1}], "rolls": [{"item_id": "ITEM_WARDEN_CHARM", "chance": 0.25, "amount": 1}]}
+  ],
+  "upgrade": {
+    "max_stars": 3,
+    "npc_id": "NPC_SMITH",
+    "steps": [
+      {"from": 0, "to": 1, "currency_cost": 8, "chance": 1.0, "materials": [{"item_id": "MATERIAL_INITIATE", "amount": 1}]},
+      {"from": 1, "to": 2, "currency_cost": 16, "chance": 0.8, "materials": [{"item_id": "MATERIAL_INITIATE", "amount": 2}]},
+      {"from": 2, "to": 3, "currency_cost": 30, "chance": 0.6, "materials": [{"item_id": "MATERIAL_INITIATE", "amount": 3}, {"item_id": "MATERIAL_ELITE_CORE", "amount": 1}, {"item_id": "MATERIAL_RITUAL", "amount": 1}]}
+    ],
+    "failure": "REDUCE_ONE_STAR",
+    "per_star_stats": {"WEAPON": {"attack": 3}, "ARMOR": {"max_hp": 12}, "ACCESSORY": {"max_ki": 10}}
+  },
+  "boss": {
+    "id": "BOSS_TRINITY_WARDEN",
+    "display_name": "Thủ Hộ Tam Giới",
+    "map_id": "MAP_ARENA",
+    "spawn_xyz": [0, 65, 172],
+    "entry_npc_id": "NPC_WARDEN",
+    "entry_quest_completed": "Q_INTRO_04",
+    "party_size": [1, 4],
+    "base_hp": 5000,
+    "hp_multiplier_per_extra_player": 0.45,
+    "attack": 18,
+    "ai_decision_interval_seconds": 1.5,
+    "melee_hit_cooldown_seconds": 4.5,
+    "reset_when_empty_seconds": 30,
+    "max_fight_seconds": 600,
+    "transition_at_hp_fraction": 0.5,
+    "transition_invulnerable_seconds": 4,
+    "phase_1": {"ground_slam_windup_seconds": 2.0, "ground_slam_damage": 16, "ground_slam_radius_blocks": 5, "ground_slam_cooldown_seconds": 9},
+    "phase_2": {"ground_slam_windup_seconds": 1.2, "ground_slam_damage": 16, "ground_slam_radius_blocks": 5, "ground_slam_cooldown_seconds": 7, "wisp_count": 3, "wisp_reward_enabled": false, "wisp_spawn_xyz": [[-12, 65, 160], [0, 65, 184], [12, 65, 160]], "beam_at_hp_fraction": 0.25, "beam_windup_seconds": 1.2, "beam_damage": 22, "safe_pads_xyz": [[-18, 65, 168], [18, 65, 168]]},
+    "reward_eligibility": {"min_damage_fraction_of_max_hp": 0.05, "min_support_seconds": 15, "min_effective_heal_hp": 24},
+    "reward_cooldown_hours": 24,
+    "loot_table": "LOOT_TRINITY_WARDEN"
+  },
+  "quests": [
+    {"id": "Q_INTRO_01", "requires": [], "objective": {"type": "CHOOSE_RACE", "count": 1}, "reward": {"free_points": 6, "starter_set_for_race": true, "unlock_signature_skill": true}},
+    {"id": "Q_INTRO_02", "requires": ["Q_INTRO_01"], "objective": {"type": "VALID_SKILL_CAST", "count": 3}, "reward": {"currency": 8}},
+    {"id": "Q_INTRO_03", "requires": ["Q_INTRO_02"], "objective": {"type": "KILL_RACE_ZONE_MOB", "count": 8, "mob_ids": ["MOB_SPARK_RAT", "MOB_ROOTLING", "MOB_CINDER_HOUND"]}, "reward": {"free_points": 6, "items": [{"item_id": "MATERIAL_INITIATE", "amount": 1}]}},
+    {"id": "Q_INTRO_04", "requires": ["Q_INTRO_03"], "objective": {"type": "UPGRADE_OWN_WEAPON_TO_STAR", "count": 1}, "reward": {"items": [{"item_id": "MATERIAL_RITUAL", "amount": 1}]}},
+    {"id": "Q_INTRO_05", "requires": ["Q_INTRO_04"], "objective": {"type": "ELIGIBLE_BOSS_CLEAR", "boss_id": "BOSS_TRINITY_WARDEN", "count": 1}, "reward": {"free_points": 16, "milestone": 2, "title": "Người Vượt Thạch Môn"}}
+  ]
+}
